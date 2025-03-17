@@ -8,19 +8,23 @@ import { useState } from "react";
 
 const RickCharSearch = () => {
     
-    const options = [
+    const optionsStatus = [
         {
-            text: "Male",
-            value: "m"
+            text: "Filter by status",
+            value: "e"
         },
         {
-            text: "Female",
-            value: "f"
+            text: "Alive",
+            value: "a"
+        },
+        {
+            text: "Dead",
+            value: "d"
             
         },
         {
-            text: "Other",
-            value: "o"
+            text: "Unknown",
+            value: "u"
         }
     ]
 
@@ -31,16 +35,16 @@ const RickCharSearch = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
+    const [filterStatus, setFilterStatus] = useState("");
     
 
     useEffect(() => {
 
             const fetchSearchResults = async () => {
-                console.log("hola")
                 try {
                     setLoading(true);
                     const responseApi = await fetch(
-                        `https://rickandmortyapi.com/api/character?name=${searchTerm}`
+                        `https://rickandmortyapi.com/api/character?name=${searchTerm}&status=${filterStatus}`
                     );
 
                     if (!responseApi.ok) {
@@ -62,7 +66,7 @@ const RickCharSearch = () => {
             };
 
             fetchSearchResults();
-    }, [searchTerm]);
+    }, [searchTerm,  filterStatus]);
 
 
     useEffect(() => {
@@ -70,7 +74,7 @@ const RickCharSearch = () => {
             
             try {
                 setLoading(true);
-                const responseApi = await fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}&name=${searchTerm}`);
+                const responseApi = await fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}&name=${searchTerm}&status=${filterStatus}`);
                 
                 
                 if(responseApi.status !== 200){
@@ -116,7 +120,7 @@ const RickCharSearch = () => {
     if(loading === true){
         return (<div id="web">
         <Header></Header>
-        <Search options={options} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+        <Search options={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}/>
         
         <p>Cargando....</p>
         </div>)
@@ -124,7 +128,7 @@ const RickCharSearch = () => {
     if(error !== null){
         return (<div id="web">
         <Header></Header>
-        <Search options={options} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+        <Search options={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus} />
         
         <p>Ocurrio un error: {error}</p>
         </div>)
@@ -134,7 +138,7 @@ const RickCharSearch = () => {
         return(
             <div id="web">
         <Header></Header>
-        <Search options={options} setSearchTerm={setSearchTerm} searchTerm={searchTerm} />
+        <Search options={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}/>
 
 
         {
