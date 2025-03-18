@@ -1,7 +1,7 @@
 import Button from "../atoms/button";
-import Card from "../molecules/card";
-import Header from "../molecules/header"
-import Search from "../molecules/search"
+import Card from "../molecules/Card";
+import Header from "../molecules/Header"
+import Search from "../molecules/Search"
 import { useEffect } from "react";
 import { useState } from "react";
 
