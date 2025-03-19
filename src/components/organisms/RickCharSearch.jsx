@@ -11,32 +11,121 @@ const RickCharSearch = () => {
     const optionsStatus = [
         {
             text: "Filter by status",
-            value: "e"
+            value: "fs",
+            id: 1
         },
         {
             text: "Alive",
-            value: "a"
+            value: "a",
+            id: 2
         },
         {
             text: "Dead",
-            value: "d"
+            value: "d",
+            id: 3
             
         },
         {
             text: "Unknown",
-            value: "u"
+            value: "u",
+            id: 4
         }
     ]
+    const optionsGender = [
+        {
+            text: "Filter Gender",
+            value: "fg",
+            id: 5
+        },
+        {
+            text: "Female",
+            value: "f",
+            id: 6
+        },{
+            text: "Male",
+            value: "m",
+            id: 7
+        },{
+            text: "Genderless",
+            value: "gl",
+            id: 8
+        },{
+            text: "Unknown",
+            value: "u",
+            id: 9
+        }
+    ]
+
+    const optionsSpecies = [
+        {
+            text: "Filter by species",
+            value: "fbs",
+            id: 10
+        },
+        {
+            text: "Human",
+            value: "h",
+            id: 11
+        },
+        {
+            text: "Alien",
+            value: "al",
+            id: 12
+        },
+        {
+            text: "Humanoid",
+            value: "hu",
+            id: 13
+        },
+        {
+            text: "Robot",
+            value: "r",
+            id: 14
+        },
+        {
+            text: "Animal",
+            value: "an",
+            id: 15
+        },
+        {
+            text: "Cronenberg",
+            value: "c",
+            id: 16
+        },
+        {
+            text: "Disease",
+            value: "d",
+            id: 17
+        },
+        {
+            text: "Mythological Creature",
+            value: "m",
+            id: 18
+        },
+        {
+            text: "Poopybutthole",
+            value: "pb",
+            id: 21
+        },
+        {
+            text: "Unknown",
+            value: "u",
+            id: 22
+        }
+    ];
+    
 
     const [loading, setLoading] = useState(false); 
     const [users, setUser] = useState([]) 
     const [fullData, setFullData] = useState([])
-    const [error, setError] = useState(null)
+    const [error, setError] = useState([null])
     const [currentPage, setCurrentPage] = useState(1)
     const [totalPages, setTotalPages] = useState(1);
     const [searchTerm, setSearchTerm] = useState("");
     const [filterStatus, setFilterStatus] = useState("");
-    
+    const [filterGender, setFilterGender] = useState("");
+    const [filterSpecies, setFilterSpecies] = useState("");
+
 
     useEffect(() => {
 
@@ -44,7 +133,7 @@ const RickCharSearch = () => {
                 try {
                     setLoading(true);
                     const responseApi = await fetch(
-                        `https://rickandmortyapi.com/api/character?name=${searchTerm}&status=${filterStatus}`
+                        `https://rickandmortyapi.com/api/character?name=${searchTerm}&status=${filterStatus}&gender=${filterGender}&species=${filterSpecies}`
                     );
 
                     if (!responseApi.ok) {
@@ -66,7 +155,7 @@ const RickCharSearch = () => {
             };
 
             fetchSearchResults();
-    }, [searchTerm,  filterStatus]);
+    }, [searchTerm,  filterStatus, filterGender, filterSpecies]);
 
 
     useEffect(() => {
@@ -74,7 +163,7 @@ const RickCharSearch = () => {
             
             try {
                 setLoading(true);
-                const responseApi = await fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}&name=${searchTerm}&status=${filterStatus}`);
+                const responseApi = await fetch(`https://rickandmortyapi.com/api/character?page=${currentPage}&name=${searchTerm}&status=${filterStatus}&gender=${filterGender}&species=${filterSpecies}`);
                 
                 
                 if(responseApi.status !== 200){
@@ -120,7 +209,8 @@ const RickCharSearch = () => {
     if(loading === true){
         return (<div id="web">
         <Header></Header>
-        <Search options={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}/>
+        <Search optionsStatus={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}  optionsGender={optionsGender} onGenderChange={setFilterGender} optionsSpecies={optionsSpecies} onSpeciesChange={setFilterSpecies}/>
+
         
         <p>Cargando....</p>
         </div>)
@@ -128,7 +218,8 @@ const RickCharSearch = () => {
     if(error !== null){
         return (<div id="web">
         <Header></Header>
-        <Search options={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus} />
+        <Search optionsStatus={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}  optionsGender={optionsGender} onGenderChange={setFilterGender} optionsSpecies={optionsSpecies} onSpeciesChange={setFilterSpecies}/>
+
         
         <p>Ocurrio un error: {error}</p>
         </div>)
@@ -138,7 +229,8 @@ const RickCharSearch = () => {
         return(
             <div id="web">
         <Header></Header>
-        <Search options={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}/>
+        <Search optionsStatus={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}  optionsGender={optionsGender} onGenderChange={setFilterGender} optionsSpecies={optionsSpecies} onSpeciesChange={setFilterSpecies}/>
+
 
 
         {

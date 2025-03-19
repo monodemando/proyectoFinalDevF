@@ -6,7 +6,7 @@ import { useState } from "react";
 const Search = (props) => {
     const [searchValue, setSearchValue] = useState("")
 
-    const {options, setSearchTerm, searchTerm, onStatusChange} = props
+    const {optionsStatus, optionsGender, setSearchTerm, searchTerm, onStatusChange, onGenderChange, optionsSpecies, onSpeciesChange} = props
 
     const sendValues = () => {
         setSearchTerm(searchValue)
@@ -20,8 +20,10 @@ const Search = (props) => {
             </div>
             
             <div id="selects">
-                <Select name="status" options={options}  valueChange={onStatusChange}></Select>
-               
+                <Select name="status" options={optionsStatus}  valueChange={onStatusChange}></Select>
+                <Select name="gender" options={optionsGender}  valueChange={onGenderChange}></Select>
+                <Select name="species" options={optionsSpecies}  valueChange={onSpeciesChange}></Select>
+
             </div>
         </div>
         
