@@ -186,20 +186,25 @@ const RickCharSearch = () => {
     }, [currentPage])
 
 
-
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      };
 
     
     const NextPage = () => {
         if (currentPage < totalPages) {
             setCurrentPage(currentPage + 1);
-           
+            scrollToTop();
         }
     };
 
     const PrevPage = () => {
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
-            
+            scrollToTop();
         }
     };
 
@@ -229,25 +234,29 @@ const RickCharSearch = () => {
         return(
             <div id="web">
         <Header></Header>
+
+        
         <Search optionsStatus={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}  optionsGender={optionsGender} onGenderChange={setFilterGender} optionsSpecies={optionsSpecies} onSpeciesChange={setFilterSpecies}/>
+        <div className="content-container">
 
 
-
-        {
-            users.map((user) => {
-                return <Card user={user} key={user.id}></Card>
-            })
-            
-           
-       }
-            <div>
-                <Button id="prevButton" onClick={
-                    PrevPage
-                } disabled={currentPage === 1}>Prev</Button>
-                <span> Página {currentPage} de {totalPages} </span>
-                <Button id="nextButton" onClick={
-                    NextPage} disabled={currentPage === totalPages}>Next</Button>
+        
+            <div className="cards-wrapper">
+            <div className="cards-container">
+            {
+                users.map((user) => (
+                <Card user={user} key={user.id} />
+                ))
+            }
             </div>
+            <div className="pagination">
+            <Button id="prevButton" onClick={PrevPage} disabled={currentPage === 1}>Prev</Button>
+            <span> Página {currentPage} de {totalPages} </span>
+            <Button id="nextButton" onClick={NextPage} disabled={currentPage === totalPages}>Next</Button>
+            </div>
+        </div>
+        </div>
+
     </div>
         )
     

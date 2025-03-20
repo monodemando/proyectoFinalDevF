@@ -7,7 +7,7 @@ const Header = () => {
     return(
         <div id="header">
             <div id="title">
-                <h2 id="titleText">Titulo</h2>
+                <h2 id="titleText">Shats Search</h2>
             </div>
             <div id="redirections">
                 <NavLink to="/" className="redirectionLinks" id="home"> Home</NavLink>
