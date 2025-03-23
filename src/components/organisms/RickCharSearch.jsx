@@ -2,6 +2,7 @@ import Button from "../atoms/button";
 import Card from "../molecules/Card";
 import Header from "../molecules/Header"
 import Search from "../molecules/Search"
+import Footer from "../molecules/Footer";
 import { useEffect } from "react";
 import { useState } from "react";
 
@@ -189,7 +190,7 @@ const RickCharSearch = () => {
     const scrollToTop = () => {
         window.scrollTo({
           top: 0,
-          behavior: 'smooth'
+          behavior: "smooth"
         });
       };
 
@@ -218,6 +219,8 @@ const RickCharSearch = () => {
 
         
         <p>Cargando....</p>
+
+        <Footer divID="footer"/>
         </div>)
     } 
     if(error !== null){
@@ -227,6 +230,8 @@ const RickCharSearch = () => {
 
         
         <p>Ocurrio un error: {error}</p>
+
+        <Footer divID="footer"/>
         </div>)
     } 
 
@@ -256,6 +261,8 @@ const RickCharSearch = () => {
             </div>
         </div>
         </div>
+
+        <Footer divID="footer"/>
 
     </div>
         )
