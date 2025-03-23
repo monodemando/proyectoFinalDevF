@@ -217,9 +217,9 @@ const RickCharSearch = () => {
         <Header></Header>
         <Search optionsStatus={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}  optionsGender={optionsGender} onGenderChange={setFilterGender} optionsSpecies={optionsSpecies} onSpeciesChange={setFilterSpecies}/>
 
-        
-        <p>Cargando....</p>
-
+        <div className="content-container">
+            <p>Cargando....</p>
+        </div>
         <Footer divID="footer"/>
         </div>)
     } 
@@ -228,9 +228,9 @@ const RickCharSearch = () => {
         <Header></Header>
         <Search optionsStatus={optionsStatus} setSearchTerm={setSearchTerm} searchTerm={searchTerm} onStatusChange={setFilterStatus}  optionsGender={optionsGender} onGenderChange={setFilterGender} optionsSpecies={optionsSpecies} onSpeciesChange={setFilterSpecies}/>
 
-        
-        <p>Ocurrio un error: {error}</p>
-
+        <div className="content-container">
+            <p>Ocurrio un error: {error}</p>
+        </div>
         <Footer divID="footer"/>
         </div>)
     } 
